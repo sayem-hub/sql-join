@@ -1,0 +1,66 @@
+Assignment: 
+Create a Database name  information.
+	Create two table  User and User_details and join both of them with inner join,
+	Left join , right join use sql query
+Now create a text file and submit 
+
+
+
+    Solution:
+===Database create query===
+    CREATE DATABASE information;
+
+    ===users table create query===
+   CREATE TABLE Users (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        username VARCHAR(60) NOT NULL,
+        age INTEGER,
+        salary DECIMAL(10,2),
+        phone VARCHAR(20),
+        email_id VARCHAR(150),
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP);
+
+    ===user_details table create query===
+    CREATE TABLE User_details (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+    	users_id INT,
+    	FOREIGN KEY (users_id) REFERENCES users(id),
+        full_name VARCHAR(200),
+        address VARCHAR(255),
+        country VARCHAR(150),
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP);
+
+
+
+    ===Data insert query on users table ===
+            INSERT INTO users (username, age, salary, phone, email_id) VALUES
+            ('abu_sayem', '25', 60000, '01723857074', 'abu_sayem@gmail.com'),
+            ('rayhan_kabir', '27', 53000, '01946405378', 'rayhan@yahoo.com'),
+            ('ashik_khan', '24', 57000, '01625897464', 'ashik@gmail.com'),
+            ('borhan_uddin', '28', 45000, '01625897464', 'borhan@yahoo.com'),
+            ('rokon_uddin', '25', 53000,  '01725897464', 'rokon@gmail.com'),
+            ('shila_akter', '26', 66000, '01825897464', 'shila@gmail.com'),
+            ('parvin_begum', '29', 50000, '01925897464', 'parvin@hotmail.com'),
+            ('lopa_akter', '30', 55000, '01525897464', 'lopa@gmail.com');
+
+          ===Data insert query on user_details table ===
+        INSERT INTO user_details (users_id, full_name, address, country) VALUES
+            ('2', 'Rayhan Kabir', 'Dinajpur, Bangladesh', 'Bangladesh'),
+            ('4', 'Borhan Uddin', 'New Delhi, India', 'India'),
+            ('1', 'Abu Sayem', 'Washington, USA', 'USA'),
+            ('3', 'Ashik Khan', 'Tokeyo, Japan','Japan'),
+            ('5', 'Rokon Uddin', 'Mumbai, India', 'India'),
+            ('7', 'Parvin Begum', 'Osaka, Japan', 'Japan'),
+            ('6', 'Shila Akter', 'Beiging, China', 'China');
+
+
+            ===INNER JOIN query===
+            SELECT user_details.id, user_details.users_id, users.username, users.age, users.salary, users.email_id, user_details.full_name, user_details.address, user_details.country FROM users INNER JOIN user_details ON users.id = user_details.users_id;
+
+            ===LEFT JOIN query===
+            SELECT user_details.id, user_details.users_id, users.username, user_details.full_name, users.age, users.salary, users.phone, user_details.address, user_details.country FROM users LEFT JOIN user_details ON users.id = user_details.users_id;
+
+            ===RIGHT JOIN query===
+           SELECT user_details.id, user_details.users_id, users.username, user_details.full_name, users.age, users.salary, users.phone, user_details.address, user_details.country FROM users RIGHT JOIN user_details ON users.id = user_details.users_id;
